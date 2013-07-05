@@ -1,6 +1,8 @@
 #node
 class Expensieve.Person
   constructor: (@name, @payed_for, @owes_for) ->
+    @cloudParent = this
+    @cloudRank = 0
 
   get_payed_for: ->
     @payed_for
@@ -13,3 +15,4 @@ class Expensieve.Person
 
   add_to_owes_for: (debt) ->
     @owes_for.push(debt)
+
