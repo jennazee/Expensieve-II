@@ -80,44 +80,5 @@ window.Expensieve =
           debts_copy.splice(i, 1)
       settled.push(curr)
 
-  settleDebts: (debts) ->
-    ####
-    # modified minimum spanning tree in which the value of a cycle-making edge is used to augment those that would be in the cycle
-    ####
-
-    #collections of nodes
-    clouds = []
-    clouds.push(people[person]) for person in people
-
-    # edges in max -> min order to make max spanning tree
-    edges = sortDebts(debts)
-    #edges in the max spanning tree
-    forest = []
-    curr = edges.pop()
-    # payer = sink, ower = source
-    payerRoot = @find(curr.payer)
-    owerRoot = @find(curr.ower)
-    if payerRoot is not owerRoot
-      forest.push(curr)
-      @union(payerRoot, owerRoot)
-    else
-
-
-  #find the root of a node, with path compression
-  find: (x) ->
-    if x is not x.parent
-      x.cloudParent = @find(x.cloudParent)
-      x.cloudParent
-
-  #join two clouds
-  union: (root1, root2) ->
-    if root1.cloudRank > root2.cloudRank
-      root2.cloudParent = root1
-    else if root1.cloudRank < root2.cloudRank
-      root1.cloudParent = root2
-    else
-      root2.cloudParent = root1
-      root1.cloudRank++
-
 
 
